@@ -39,18 +39,27 @@ public with sharing class ClassesObjectsMethods {
      * @return A list containing the length of the string, a substring of the string, and the string in lower case.
      */
     public static List<String> practiceStringMethods() {
+        
         // Initialize a String with 'Hello, Salesforce!'
-        
-        // Get the length of the String        
+        String welcome = 'Hello, Salesforce!';
+        // Get the length of the String
+        String welcomeLength = String.valueOf(welcome.length());        
         // Get a substring of the String of the first 5 characters
+        String welcomeFirstFive = welcome.substring(0,5);
         // Convert the String to lower case
+        String welcomeLower = welcome.toLowerCase();
         
+        List<String> qOne = new List<String>{
+            welcomeLength,
+            welcomeFirstFive,
+            welcomeLower
+        };
         // Return the list with the string data
         // In the first position add the string length
         // In the second position add the substring
         // In the third position add the string in lower case
-
-        return null; // Replace null with the variable you used to store the result
+        System.debug(JSON.serializePretty(qOne));
+        return qOne; // Replace null with the variable you used to store the result
     }
 
     /**
@@ -62,14 +71,19 @@ public with sharing class ClassesObjectsMethods {
      */
     public static List<Boolean> checkStringContent(String input) {
         // Initialize a list to store the results
-        
-        // Check if the string starts with 'Sales'
-        
-        // Check if the string ends with 'Force'
-        
-        // Check if the string contains 'Awesome'
-        
-        return null; // Replace null with the variable you used to store the result
+        List<Boolean> qTwo = new List<Boolean>();        
+
+        Boolean startsWithSales = input.startsWith('Sales'); // Check if the string starts with 'Sales'
+        Boolean endsWithForce = input.endsWith('Force'); // Check if the string ends with 'Force'
+        Boolean containsAwesome = input.contains('Awesome'); // Check if the string contains 'Awesome'
+
+        qTwo.add(startsWithSales);
+        qTwo.add(endsWithForce);
+        qTwo.add(containsAwesome);
+
+        System.debug(JSON.serializePretty(qTwo));
+
+        return qTwo; // Replace null with the variable you used to store the result
     }
 
     /**
@@ -81,15 +95,21 @@ public with sharing class ClassesObjectsMethods {
      */
     public static String removeDuplicateWords(String sentence) {
         // Split the sentence into words
-
+        List<String> splitSentence = sentence.split(' ');        
+        
         // Create a set to store the unique words
-
+        Set<String> uniqueWords = new Set<String>(); 
+        
         // Add each word to the set
+        for (Integer i = 0; i < splitSentence.size(); i++) {
+            uniqueWords.add(splitSentence[i]);    
+        }
 
         // Join the unique words back into a sentence
+        String joinedSentence = String.Join(uniqueWords, ' ');  
 
         // Return the sentence with unique words
-        return null; // Replace null with the variable you used to store the result
+        return joinedSentence; // Replace null with the variable you used to store the result
     }
 
     /**
@@ -102,16 +122,25 @@ public with sharing class ClassesObjectsMethods {
      */
     public static Integer countVowels(String str) {
         // Initialize the result Integer
+        Integer qFourResult = 0;
 
-        /*
-        for () {
+        
+        for (Integer i = 0; i < str.length(); i++) {
             // get individual characters from the string - hint use substring or split
+            String currentChar = str.substring(i , i + 1); 
+            
             // check if the character is a vowel
-            // if it is a vowel, increment the result Integer
+            if (
+                currentChar == 'a' || 
+                currentChar == 'e' || 
+                currentChar == 'i' || 
+                currentChar == 'o' || 
+                currentChar == 'u'){
+                    // if it is a vowel, increment the result Integer
+                    qFourResult += 1;
+                } 
         }
-        */
-
-        return null; // Replace null with the variable you used to store the result
+        return qFourResult; // Replace null with the variable you used to store the result
     }
 
     /**
@@ -126,16 +155,25 @@ public with sharing class ClassesObjectsMethods {
         List<String> scientistNames = new List<String>{'Tim Berners-Lee', 'Alan Turing', 'Grace Hopper', 'Donald Knuth', 'Guido van Rossum', 'Ken Thompson', 'Stephen Hawking'};
 
         // The variable to store the concatenated string
+        String scientistConcat = ('');
 
         // Loop through the list of scientists' names
+        for (Integer i = 0 ; i < scientistNames.size() ; i++) {
+            String currentScientist = scientistNames[i];
 
             // If the name doesn't contain the letter 'G', skip this iteration
-
-            // Add the name to the result string, followed by a comma
-
+            if (currentScientist.contains('G') || currentScientist.contains('g')) {
+                // Add the name to the result string, followed by a comma
+                scientistConcat = scientistConcat + currentScientist + ',';
+            }
+        }
+        
         // Remove the last comma from the result string
+        if (scientistConcat.endsWith(',')) {
+            scientistConcat = scientistConcat.substring(0, scientistConcat.length() - 1);
+        } 
 
-        return null; // Replace null with the variable you used to store the result
+        return scientistConcat; // Replace null with the variable you used to store the result
     }
 
     /**
@@ -148,11 +186,12 @@ public with sharing class ClassesObjectsMethods {
      */
     public static Double calculateDifferenceOfSquares(Double a, Double b) {
         // Square the input numbers using the Math.pow() function
-
+        Double squaredA = Math.pow(a , 2);
+        Double squaredB = Math.pow(b , 2);
         // Calculate the absolute difference using Math.abs() function
-
+        Double qSix = Math.abs(squaredA - squaredB);
         // Return the result
-        return null; // Replace null with the variable you used to store the result
+        return qSix; // Replace null with the variable you used to store the result
     }
 
     /**
@@ -163,9 +202,10 @@ public with sharing class ClassesObjectsMethods {
      */
     public static Integer generateRandomNumber() {
         // Use Math class to generate number between 50 and 100
-
+        Integer randomNumber = (Integer)(Math.random() * 100);
+        randomNumber = Math.round(randomNumber);
         // Return the random integer
-        return null; // Replace null with the variable you used to store the result
+        return randomNumber; // Replace null with the variable you used to store the result
     }
 
     /**
@@ -176,11 +216,11 @@ public with sharing class ClassesObjectsMethods {
      */
     public static String getCurrentDate() {
         // Get the todays date
-
+        Date todaysDate = Date.today();
         // Format the current date
-
+        String todaysDateFormatted = todaysDate.format();
         // Return the result
-        return null; // Replace null with the variable you used to store the result
+        return todaysDateFormatted; // Replace null with the variable you used to store the result
     }
 
     /**
@@ -191,14 +231,24 @@ public with sharing class ClassesObjectsMethods {
      */
     public static String getDayOfWeek(DateTime dt) {
         // Define a map of day of the week as a key and day number as the value
+        Map<String, Integer> weekdayNum = new Map<String, Integer>();
         // Monday = 1, Tuesday = 2, etc.
+        weekdayNum.put('Monday', 1);
+        weekdayNum.put('Tuesday', 2);
+        weekdayNum.put('Wednesday',3);
+        weekdayNum.put('Thursday', 4);
+        weekdayNum.put('Friday', 5);
+        weekdayNum.put('Saturday', 6);
+        weekdayNum.put('Sunday', 7);
 
         // Get the day name using .format('EEEE');
+        String dayOfTheWeek = dt.format('EEEE');
 
         // Get the day number from the map using the day name
+        String dayNum = String.valueOf(weekdayNum.get(dayOfTheWeek));
 
         // Return the result as a string
-        return null; // Replace null with the variable you used to store the result
+        return dayNum; // Replace null with the variable you used to store the result
     }
 
 
@@ -212,10 +262,13 @@ public with sharing class ClassesObjectsMethods {
      * @return The a positive number years between the two dates, or null if either date is null.
      */
     public static Integer calculateYearDifference(Date d1, Date d2) {
-
+        Integer yearDiff = (0);
+        if( d1 == null || d2 == null){
+            return null;
+        }
         // Subtract the difference in years
-
-        return null; // Replace null with the variable you used to store the result
+        yearDiff =  Math.abs(d1.year() - d2.year());
+        return yearDiff; // Replace null with the variable you used to store the result
     }
 
     /**
@@ -227,19 +280,26 @@ public with sharing class ClassesObjectsMethods {
      */
     public class Book {
         // Declare three public instance variables - title, author, pages
+        
         // title
+        public String title;
         // author
+        public String author;
         // pages
+        public Integer pages;
     
         // Book constructor to initialize the title and author
-        public Book() {
+        public Book(String title, String author) {
             // Initialize the title and author
+            this.title = title;
+            this.author = author;
         }
     
         // Method that returns the details of the book
         public String getBookDetails() {
             // return A string containing the details of the book in the format "Title: <title>, Author: <author>"
-            return null; // Replace null with the variable you used to store the result
+            String qEleven = 'Title: ' + this.title + ', Author: ' + this.author;
+            return qEleven; // Replace null with the variable you used to store the result
         }
     }
     
@@ -252,11 +312,13 @@ public with sharing class ClassesObjectsMethods {
      */
     public static String createAndGetBookDetails() {
         // Create a Book object with title "A Brief History of Time" and author "Stephen Hawking"
-
+        Book book = new Book('A Brief History of Time', 'Stephen Hawking');
+        
         // Call the getBookDetails method on the book object to get the details of the book
-
+        String details = book.getBookDetails();
+        
         // Return the details of the book
-        return null; // Replace null with the variable you used to store the result
+        return details; // Replace null with the variable you used to store the result
     }
 
     /**
@@ -270,18 +332,20 @@ public with sharing class ClassesObjectsMethods {
      */
     public static List<Book> generateBookList(Book myBook1) {
         // Create a list of books
-
+        List<Book> books = new List<Book>();
         // Update the title and author of myBook1
-
+        myBook1.title = 'Harry Potter and the Chamber of Secrets';
+        myBook1.author = 'J.K. Rowling';
         // Update the pages for myBook1 to 352
-
+        myBook1.pages = 352;
+        books.add(myBook1);
         // Create a new Book object with title "A Brief History of Time" and author "Stephen Hawking"
-
+        Book mybook2 = new Book('A Brief History of Time', 'Stephen Hawking');
         // Update the pages for A Brief History of Time to 256
-
+        mybook2.pages = 256;
         // Add the book to the list
-        
-        return null; // Replace null with the variable you used to store the result      
+        books.add(mybook2);
+        return books; // Replace null with the variable you used to store the result      
     }
 
 
@@ -294,20 +358,39 @@ public with sharing class ClassesObjectsMethods {
      */
     public class Person {
         // Declare private two instance variables - (TEXT) name and (Number) age
-        
+        private String name;
+        private Integer age;
         // Constructor to initialize the name and age
-    
-        // Method introduceYourself that returns the details of the person        
+        public Person(String name, Integer age) {
+            this.name = name;
+            this.age = age;
+        }
+        // Method introduceYourself that returns the details of the person 
+        public String introduceYourself() {
+
         // Return a string in the format "Hello, my name is <name> and I am <age> years old."
         // For example, introduceYourself() should return a string like "Hello, my name is John Doe and I am 28 years old."
+        return 'Hello, my name is ' + this.name + ' and I am ' + this.age + ' years old.';
+        }
 
         // Getter method that returns the name of the person
+        public String getName() {
+        return this.name;
+        }
 
         // Getter method that returns the age of the person
+        public Integer getAge(){
+        return this.age;
+        }
 
         // Setter method that sets the name of the person
-
+        public void setName(String newName) {
+            this.name = newName;
+        }
         // Setter method that sets the age of the person
+        public void setAge(Integer newAge) {
+            this.age = newAge;
+        }
     }
 
     /**
@@ -321,14 +404,18 @@ public with sharing class ClassesObjectsMethods {
         List<String> results = new List<String>();
         // Create a new instance of Person class
         // Name the person 'John Doe' and set the age to 28
-
+        Person newPerson = new Person('John Doe', 28);
+        
         // Add the details of the person using the introduceYourself method
+        results.add(newPerson.introduceYourself());
 
         // Get the name of the person using the getter method and add it to the list
+        results.add(newPerson.getName());
 
         // Get the age of the person using the getter method and add it to the list
-        
-        return null; // Replace null with the variable you used to store the result
+        results.add(String.valueOf(newPerson.getAge()));
+
+        return results; // Replace null with the variable you used to store the result
     }
 
     /**
@@ -340,9 +427,10 @@ public with sharing class ClassesObjectsMethods {
      */
     public static Person createPerson(String name, Integer age) {
         // Create a new instance of the Person class using the provided name and age
-        
+        Person person2 = new Person(name,age);
         // Return the new instance of the Person class
-        return null; // Replace null with the variable you used to store the result
+        
+        return person2; // Replace null with the variable you used to store the result
     }
 
     /**
@@ -355,15 +443,18 @@ public with sharing class ClassesObjectsMethods {
      * @return A list of new Person objects.
      */
     public static List<Person> createMultiplePersons(List<String> names, Integer age) {
-
+        List<Person> persons = new List<Person>();
         // Loop through each name in the provided list of names
-            // Create a new Person object for each name
+        for(String name : names) {
             
-            // Add the new Person object to the list of Person objects
-        
+        // Create a new Person object for each name
+            Person person = new Person(name, age);
+        // Add the new Person object to the list of Person objects
+            persons.add(person);
+        }       
         
         // Return the list of Person objects
-        return null; // Replace null with the variable you used to store the result
+        return persons; // Replace null with the variable you used to store the result
     }
 
 
@@ -378,6 +469,16 @@ public with sharing class ClassesObjectsMethods {
      * @return The Person object of the older person.
      */
     public static Person getOlderPerson(Person person1, Person person2) {
-        return null; // Replace null with the variable you used to store the result
+        Person q18;
+        if (person1.age > person2.age) {
+            q18 = person1;
+            
+        } else if (person1.age < person2.age) {
+            q18 = person2;
+            
+        } else {
+            q18 = person1;
+        }
+        return q18; // Replace null with the variable you used to store the result
     }
 }
